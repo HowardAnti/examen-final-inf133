@@ -20,7 +20,7 @@ def get_restaurants():
 
 @restaurant_bp.route("/restaurants/<int:id>", methods=["GET"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def get_restaurant(id):
     restaurant = Restaurant.get_by_id(id)
     if restaurant:
@@ -31,7 +31,7 @@ def get_restaurant(id):
 
 @restaurant_bp.route("/restaurants", methods=["POST"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def create_restaurant():
     data = request.json
     name=data.get("name")
@@ -54,7 +54,7 @@ def create_restaurant():
 
 @restaurant_bp.route("/restaurants/<int:id>", methods=["PUT"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def update_restaurant(id):
     restaurant = Restaurant.get_by_id(id)
 
@@ -77,7 +77,7 @@ def update_restaurant(id):
 
 @restaurant_bp.route("/restaurants/<int:id>", methods=["DELETE"])
 @jwt_required
-@roles_required(["admin"])
+@roles_required("admin")
 def delete_restaurant(id):
     restaurant=Restaurant.get_by_id(id)
     if not restaurant:

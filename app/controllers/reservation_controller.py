@@ -11,7 +11,7 @@ reservation_bp = Blueprint("reservation", __name__)
 
 @reservation_bp.route("/reservations", methods=["GET"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def get_reservations():
     reservations = Reservation.get_all()
     return jsonify(render_reservation_list(reservations))
@@ -20,7 +20,7 @@ def get_reservations():
 
 @reservation_bp.route("/reservations/<int:id>", methods=["GET"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def get_reservation(id):
     reservation = Reservation.get_by_id(id)
     if reservation:
@@ -31,7 +31,7 @@ def get_reservation(id):
 
 @reservation_bp.route("/reservations", methods=["POST"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def create_reservation():
     data = request.json
     user_id=data.get("user_id")
@@ -55,7 +55,7 @@ def create_reservation():
 
 @reservation_bp.route("/reservations/<int:id>", methods=["PUT"])
 @jwt_required
-@roles_required("Admin")
+@roles_required("admin")
 def update_reservation(id):
     reservation = Reservation.get_by_id(id)
 
@@ -78,7 +78,7 @@ def update_reservation(id):
 
 @reservation_bp.route("/reservations/<int:id>", methods=["DELETE"])
 @jwt_required
-@roles_required(["admin"])
+@roles_required("admin")
 def delete_reservation(id):
     reservation=Reservation.get_by_id(id)
     if not reservation:
